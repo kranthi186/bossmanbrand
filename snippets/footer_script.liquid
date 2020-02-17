@@ -1,0 +1,60 @@
+
+
+<script>
+  (function () {
+    if ( typeof window.CustomEvent === "function" ) return false; //If not IE
+  
+    function CustomEvent ( event, params ) {
+      params = params || { bubbles: false, cancelable: false, detail: undefined };
+      var evt = document.createEvent( 'CustomEvent' );
+      evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+      return evt;
+    }
+  
+    CustomEvent.prototype = window.Event.prototype;
+  
+    window.CustomEvent = CustomEvent;
+  })();
+  
+  
+  document.addEventListener("StartAppLoading", function(event) {
+  
+    setTimeout(function(){
+      document.dispatchEvent(new CustomEvent('StartKernelLoading'));
+    }, 500);
+    
+    setTimeout(function(){
+      document.dispatchEvent(new CustomEvent('StartOtherLoading'));
+    }, 1500);
+  
+  
+    setTimeout(function(){
+      document.dispatchEvent(new CustomEvent('StartAsyncLoading'));
+    }, 2500);
+  });
+  
+  document.addEventListener("StartOtherLoading", function(event) {
+    // klaviyo
+    var _learnq = _learnq || [];
+
+    _learnq.push(["account", "Q9aaik"]);
+
+    (function () {
+        var b = document.createElement("script");
+        b.type = "text/javascript";
+        b.async = true;
+        b.src = (
+            "https:" == document.location.protocol
+                ? "https://"
+                : "http://"
+        ) + "a.klaviyo.com/media/js/analytics/analytics.js";
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(b, a);
+    })();
+
+    // load fonts
+    loadCSS('https://fonts.googleapis.com/css?family=Abril+Fatface');
+    loadCSS('https://fonts.googleapis.com/css?family=Roboto');
+    loadCSS('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
+  });
+  </script>

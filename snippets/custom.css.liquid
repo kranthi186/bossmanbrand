@@ -1,0 +1,316 @@
+
+@media screen and (max-width: 767px) {
+  	main.main-content {
+  		padding-top: 140px;
+  	}
+}
+
+@media all and (min-width: 1023px) {
+  .header.big .menu {
+  	display: none;
+  }
+  
+  .menu.media {
+  	display: none;
+  }
+  
+}
+
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+	main.main-content {
+  		padding-top: 180px;
+  	}
+}
+
+.main-content {
+	padding-top: 275px;
+}
+
+#menu--burger {
+	display: none;
+    margin-bottom: 10px;
+}
+
+.atc-banner--container {
+    position: fixed;
+    top: 0;
+    z-index: 999999998;
+    display: none;
+    width: 100%;
+    background-color: #fff;
+    outline: 0;
+    -webkit-box-shadow: 0 2px 5px rgba(127,127,127,0.25);
+    box-shadow: 0 2px 5px rgba(127,127,127,0.25);
+    -webkit-transition: text-shadow 0.275s linear;
+    transition: text-shadow 0.275s linear
+}
+
+.visible {
+	display: block !important;
+}
+
+.atc-banner--outer {
+    position: relative;
+    padding: 1.25rem
+}
+
+.atc-banner--inner {
+    width: 100%;
+    max-width: 820px;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    margin-right: auto;
+    margin-left: auto;
+    table-layout: fixed;
+    text-align: center
+}
+
+@media screen and (min-width: 720px) {
+    .atc-banner--inner {
+        display:table;
+        text-align: left
+    }
+}
+
+.atc-banner--product {
+    font-size: 16px;
+    vertical-align: middle
+}
+
+@media screen and (min-width: 720px) {
+    .atc-banner--product {
+        display:table-cell;
+        width: 54%;
+        padding-right: 2rem
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .atc-banner--product {
+        padding-right:2rem
+    }
+}
+
+.atc-banner--cart {
+/*     margin-top: 3.125rem; */
+  	margin-top: 1.125rem;
+    vertical-align: middle
+}
+
+@media screen and (min-width: 720px) {
+    .atc-banner--cart {
+        display:table-cell;
+        width: 46%;
+        padding-left: 1.75rem;
+        margin-top: 0;
+        border-left: 1px solid rgba(0,0,0,0.15)
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .atc-banner--cart {
+        padding-left:3.125rem
+    }
+}
+
+.atc-banner--product-title {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #4c4c4c
+}
+
+.atc-banner--product-title--icon {
+    display: inline-block;
+    width: 18px;
+    height: 13px;
+    margin-top: -3px;
+    margin-right: 5px;
+    vertical-align: middle
+}
+
+.atc-banner--product-title--icon svg {
+    display: block;
+    width: 100%;
+    height: 100%
+}
+
+.atc--product {
+    max-width: 19.375rem;
+    margin: 2rem auto 0;
+    font-size: 0;
+    text-align: left;
+    vertical-align: middle
+}
+
+@media screen and (min-width: 720px) {
+    .atc--product {
+        display:block;
+        max-width: 100%;
+        margin-top: 1.75rem
+    }
+}
+
+.atc--product-image {
+    display: inline-block;
+    width: 100px;
+    vertical-align: middle
+}
+
+.atc--product-image svg,.atc--product-image img {
+    max-width: 100%
+}
+
+.atc--product-details {
+    display: inline-block;
+    width: calc(100% - 8rem);
+    margin-left: 1.75rem;
+    font-size: 16px;
+    vertical-align: middle
+}
+
+.atc--product-details--title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 1.3125
+}
+
+.atc--product-details--options {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    opacity: 0.6
+}
+
+.atc--product-details--price {
+    display: block;
+    margin-top: 0.25rem;
+    line-height: 1.2
+}
+
+.atc-banner--cart-subtotal {
+    font-size: 1.25rem
+}
+
+.atc-subtotal--label {
+    opacity: 0.6
+}
+
+.atc-subtotal--price {
+    display: inline-block;
+    margin-left: 0.5rem;
+    color: #4c4c4c
+}
+
+.atc-banner--cart-footer {
+    margin-top: 1.75rem;
+    font-size: 0
+}
+
+.atc-button--viewcart,.atc-button--checkout {
+    padding: 0.75rem 1.125rem;
+    font-size: 1rem
+}
+
+.atc-button--viewcart {
+	color: #05901f;
+    font-weight: 700;
+    border: 1px solid rgba(127,127,127,0.3);
+    border-radius: 3px;
+}
+
+.atc-button--viewcart:hover {
+	background: #fff;
+    border: 1px solid rgba(127,127,127,0.5);
+}
+
+.atc-button--checkout {
+    margin-left: 0.5rem;
+  	background-color: #05901f;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 3px;
+}
+
+.atc-button--checkout:hover {
+  	background: #05961f;
+}
+
+.atc-banner--close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+    .atc-banner--close {
+        right:25px
+    }
+}
+
+
+/*** menu ***/
+.site-header-sticky--scrolled #menu--burger{
+    display: block;
+}
+.site-header-sticky--scrolled .header.big .container .head {
+    padding-bottom:0px
+}
+
+.site-header-sticky--scrolled .header.big .menu .container {
+    margin-bottom:10px;
+}
+
+.site-header-sticky--scrolled .head a.logo {
+    margin-left: -440px;
+}
+
+.site-header-sticky--scrolled .header.big {
+    padding-top: 0px;
+    margin-bottom: 5px;
+}
+
+
+.header.big .container .menu.visible .head {
+  padding-bottom: 0px;
+}
+.header.big .container .menu.visible .head {
+  padding-bottom: 33px;
+}
+
+/*** end menu ***/
+
+
+/*** loader user cart ***/
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 100px auto;
+  background-color: #333;
+
+  border-radius: 100%;  
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% { -webkit-transform: scale(0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-scaleout {
+  0% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+/*** end loader user cart ***/

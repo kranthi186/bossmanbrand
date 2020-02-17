@@ -21,7 +21,12 @@
 
   <div class="main">
     <div class="img">
-      <a href="{{ product.url }}"><img src="{{ product.featured_image.src | img_url: '250x' }}" alt="{{ product.title }}"></a>
+      <a href="{{ product.url }}">
+        {%- assign load_img_src = product.featured_image.src | img_url: '10x' -%}
+        {%- assign load_img_class = 'large' -%}
+        <img {% include '__opt_load_img' src:load_img_src class:load_img_class %} alt="{{ product.title }}" />
+        <!-- <img src="{{ product.featured_image.src | img_url: '250x' }}" alt="{{ product.title }}"> -->
+      </a>
     </div>
         <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="form-vertical">
           
@@ -51,7 +56,7 @@
   .products_content_main__grid_box {margin-right: 0}
   .products_content_main__grid_box h3 {display: inline-block; font-size: 15px; height: auto;}
   .products_content_main__grid_box .main .img img {height: 137px}
-  .yotpo-clr {display: none; !important}
+  .yotpo-clr {display: none!important;}
   .ro_widget {display: none;}
   .jdgm-star{font-family: 'JudgemeStar'!important;}
 

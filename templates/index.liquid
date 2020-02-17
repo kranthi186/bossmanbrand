@@ -9,23 +9,39 @@
       <a href="/products/big-boss-facial-hair-care-package"><img src="{{ "top-banner.jpg" | asset_img_url: '950x331' }}" alt="Banner" class="img-responsive"></a>
       <a href="/products/big-boss-facial-hair-care-package"><img src="https://cdn.shopify.com/s/files/1/2283/7011/t/26/assets/top-banner.png?4776" alt="Banner" class="img-responsive"></a>
       {% endcomment %}
-      <a href="/collections/beard-care-packages"><img src="https://cdn.shopify.com/s/files/1/2283/7011/files/top-banner-4stages.jpg?v=1581586496" alt="Banner" class="img-responsive"></a>
+      <a href="/collections/beard-care-packages">
+        {%- assign load_img_src = 'top-banner-4stages.jpg' | asset_img_url: '10x', format: 'pjpg' -%}
+        {%- assign load_img_class = 'img-responsive' -%}
+        <img {% include '__opt_load_img' src:load_img_src class:load_img_class %} alt="Banner" />
+      </a>
     </div>
     <div class="features-home">
-    {% section 'features-products' %}
+      {% section 'features-products' %}
     </div>
     <div class="about">
       <div class="advantage">
         <div class="advantage_box">
-          <span><img src="{{ "satisfaction-label.png" | asset_img_url: '225x225' }}" alt="Banner" class="img-responsive"></span>
+          <span>
+            {%- assign load_img_src = "satisfaction-label.png" | asset_img_url: '10x' -%}
+            {%- assign load_img_class = 'img-responsive' -%}
+            <img {% include '__opt_load_img' src:load_img_src class:load_img_class %} alt="" />
+          </span>
           <p>Bossman Brands makes the best products on the market and we stand by every one of them. We offer a LIFETIME Warranty and a Money-Back Guarantee.</p>
         </div>
         <div class="advantage_box">
-          <span><img src="{{ "quality-label.png" | asset_img_url: '232x269' }}" alt="Banner" class="img-responsive"></span>
+          <span>
+            {%- assign load_img_src = "quality-label.png" | asset_img_url: '10x' -%}
+            {%- assign load_img_class = 'img-responsive' -%}
+            <img {% include '__opt_load_img' src:load_img_src class:load_img_class %} alt="" />
+          </span>
           <p>We design the most innovative products that not only perform better, they also last longer. Bossman believes in using the highest quality ingredients at a FAIR price.</p>
         </div>
         <div class="advantage_box">
-          <span><img src="{{ "brotherhood-label.png" | asset_img_url: '229x273' }}" alt="Banner" class="img-responsive"></span>
+          <span>
+            {%- assign load_img_src = "brotherhood-label.png" | asset_img_url: '10x' -%}
+            {%- assign load_img_class = 'img-responsive' -%}
+            <img {% include '__opt_load_img' src:load_img_src class:load_img_class %} alt="" />
+          </span>
           <p>BROTHERHOOD seal of approval. Get access to exclusive discounts and a network of brothers who always have your back!<br><a href="https://www.facebook.com/groups/461456150702365/" target="_blank" style="color:#d49400;text-decoration:underline;">JOIN NOW</a></p>
         </div>
       </div>

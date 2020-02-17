@@ -19,7 +19,10 @@
     </div>
     <div class="main">
       <div class="img">
-           <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}">
+        {%- assign load_img_src = product.featured_image.src | img_url: '10x' -%}
+        {%- assign load_img_class = 'large' -%}
+        <img {% include '__opt_load_img' src:load_img_src class:load_img_class %} alt="{{ product.title }}" />
+        <!-- <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}"> -->
       </div>
       <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="form-vertical">
         <select name="id" id="productSelect" class="product-single__variants" style="display: none">

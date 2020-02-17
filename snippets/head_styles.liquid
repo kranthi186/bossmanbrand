@@ -1,0 +1,20 @@
+<style>
+  {% include 'main.css' %}
+  {% include 'custom.css' %}
+  {% include 'product-reviews-override.css' %}
+  {% include 'custom.scss' %}
+</style>
+<!-- {{ 'custom.scss.css' | asset_url | stylesheet_tag }} -->
+
+<!-- <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" rel="stylesheet"> -->
+
+<style>
+  {% if template contains 'index' %}
+    {% include 'hypervisual.css' %}
+    {% include 'hypervisual-single-column.css' %}
+  {% endif %}
+  {% include 'okendo-style.css' %}
+</style>
+
+
+<!-- {{ 'okendo-style.css' | asset_url | stylesheet_tag }} -->

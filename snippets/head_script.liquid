@@ -1,0 +1,66 @@
+<script>
+  {% include 'js_lib' %}
+!function(e){var t=function(t,o,n){"use strict";var r,a=e.document.getElementsByTagName("script")[0],c=e.document.createElement("script");return"boolean"==typeof o&&(r=n,n=o,o=r),c.src=t,c.async=!n,a.parentNode.insertBefore(c,a),o&&"function"==typeof o&&(c.onload=o),c};"undefined"!=typeof module?module.exports=t:e.loadJS=t}("undefined"!=typeof global?global:this);
+!function(e){"use strict";var n=function(n,t,o){var l,r=e.document,i=r.createElement("link");if(t)l=t;else{var a=(r.body||r.getElementsByTagName("head")[0]).childNodes;l=a[a.length-1]}var d=r.styleSheets;i.rel="stylesheet",i.href=n,i.media="only x",l.parentNode.insertBefore(i,t?l:l.nextSibling);var f=function(e){for(var n=i.href,t=d.length;t--;)if(d[t].href===n)return e();setTimeout(function(){f(e)})};return i.onloadcssdefined=f,f(function(){i.media=o||"all"}),i};"undefined"!=typeof module?module.exports=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+document.addEventListener("StartOtherLoading", function(event) {
+  // static.hotjar.com
+  (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:820877,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KXBZSQ3');
+    // End Google Tag Manager
+});
+</script>
+<!--  -->
+<noscript>
+  <iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KXBZSQ3" style="display:none;visibility:hidden" width="0"></iframe>
+</noscript>
+
+<script type="text/javascript" src="{{ 'jquery.zoom.min.js' | asset_url }}" defer="defer"></script>
+{{ 'modernizr.min.js' | asset_url | script_tag }}
+{% if template contains 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+{% endif %}
+
+{% capture asyncLoad %}
+window.addEventListener('load', function load(event){setTimeout(function(){ asyncLoad(); document.dispatchEvent(new CustomEvent('StartAppLoading'));}, 3500)},false);
+document.addEventListener("StartAsyncLoading", function(event)
+{
+  document.dispatchEvent(new CustomEvent('StartKLoad'));
+
+});
+{% endcapture %}
+
+{% capture KernalHead %}
+  document.addEventListener('StartKernelLoading', function() { var customDocumentWrite = 
+{% endcapture %}
+
+{% capture KernalFooter %}
+  loadJS(eventsListenerScript.src); });
+{% endcapture %}
+
+
+{% capture content_header %}
+  {{
+    content_for_header
+  | replace: ' x.parentNode.insertBefore(s, x)', 'loadJS(urls[i])' 
+  | remove: "window.attachEvent('onload', asyncLoad)" 
+  | replace: "window.addEventListener('load', asyncLoad, false);", asyncLoad 
+  | replace: 'var customDocumentWrite = ', KernalHead 
+  | replace: "document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);", KernalFooter
+  | replace: "DOMContentLoaded", 'StartKLoad'
+  }}
+{% endcapture %}
+
+{{ content_header }}

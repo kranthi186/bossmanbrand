@@ -1,0 +1,33 @@
+{% capture LOAD_IMG %}
+
+	{%- comment -%}
+	Lazyload
+	https://github.com/aFarkas/lazysizes
+	https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/rias
+	{%- endcomment -%}
+
+	{%- assign exists = true -%}
+
+	{%- if src == null -%}
+		{%- assign exists = false -%}		
+	{%- endif -%}
+
+	{%- if src contains 'no-image' -%}
+		{%- assign exists = false -%}
+	{%- endif -%}
+
+	{%- if exists == true -%}
+		{% capture data-srcset %}
+			{% assign replace = '_{width}x' %}
+			{{ src | replace: '_10x', replace }}
+		{% endcapture %}
+
+		data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ data-srcset }}" class="lazyload {{ class }}"
+
+	{%- else -%}
+		
+		class="lazyload {{ class }}"
+
+	{%- endif -%}
+
+{% endcapture %}{{ LOAD_IMG | strip | replace:'	' | strip_newlines }}

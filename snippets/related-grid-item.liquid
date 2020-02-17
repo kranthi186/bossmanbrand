@@ -5,7 +5,12 @@
 
 <div class="like_item">
   <div class="img">
-    <a href="{{ product.url }}"><img src="{{ product.featured_image.src | img_url: '200x' }}" alt="{{ product.title }}"></a>
+    <a href="{{ product.url }}">
+      {%- assign load_img_src = product.featured_image.src | img_url: '10x', format: 'pjpg' -%}
+      {%- assign load_img_class = '' -%}
+      <img {% include '__opt_load_img' src:load_img_src class:load_img_class %} width="200" alt="{{ product.title }}" />
+      <!-- <img src="{{ product.featured_image.src | img_url: '200x' }}" alt="{{ product.title }}" width="200"> -->
+    </a>
   </div>
   <div class="head">
     <div class="reviews">

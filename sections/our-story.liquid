@@ -2,7 +2,9 @@
     
     <div class="image_container">
 
-        <img src="{{section.settings.image | img_url : ''}}" />
+        {%- assign load_img_src = section.settings.image | img_url: '10x', format: 'pjpg' -%}
+        {%- assign load_img_class = 'img-responsive' -%}
+        <img {% include '__opt_load_img' src:load_img_src class:load_img_class %} alt="" />
 
     </div>
 

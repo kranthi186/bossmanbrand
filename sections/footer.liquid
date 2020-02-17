@@ -5,7 +5,11 @@
         {% for i in (1..7) %}
         	{% assign number = i | downcase  %}
         	{% assign brand = "brand" | append: number  %}
-        	<img src="{{ brand | append: '.png' | asset_url }}" alt="Brand {{i}}">
+          {% assign img_src = brand | append: '.png' %}
+          {%- assign load_img_src = img_src | asset_img_url: '10x' -%}
+          {%- assign load_img_class = 'img-responsive-footer' -%}
+          <img {% include '__opt_load_img' src:load_img_src class:load_img_class %} alt="Brand {{i}}" />
+          <!-- <img src="{{ brand | append: '.png' | asset_url }}" alt="Brand {{i}}"> -->
         {% endfor %}
       </div>
     </div>
