@@ -1,0 +1,44 @@
+{% unless template == 'index' or template == 'cart' or template contains 'product' %}
+<div class="breadcrumbs" style="margin-top: -40px">
+  <div class="container">
+    <ul>
+      <li><a href="/">{{ 'general.breadcrumbs.home' | t }}</a></li>
+
+      {% if template contains 'collection' and collection.handle %}
+		{% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {% if collection.url == "/collections/all"%}
+      	<li class="active"><a  href="{{collection.url}}">All products</a></li>
+        {% else %}
+     	<li class="active"><a href="{{collection.url}}">{{ collection.title }}</a></li>
+        {% endif %}
+
+      {% elsif template == 'article' %}
+
+      	<li>{{ blog.title | link_to: blog.url }}</li>
+      	<li class="active"><a href="{{article.url}}">{{ article.title }}</a><li>
+
+      {% elsif template contains 'page' %}
+		{% capture url %}/pages/{{ page_title | downcase }}{% endcapture %}
+      	{% if page.url == url %}
+      		<li class="active"><a href="{{page.url}}">{{ page_title }}</a></li>
+      	{% else %}
+      		<li><a href="{{page.url}}">{{ page_title }}</a></li>
+      	{% endif %}
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
+{% endunless %}
+
+<style>
+  @media only screen and (max-width : 768px) {
+    .breadcrumbs {margin-top: 0 !important}
+  }
+  @media only screen and (max-width : 480px) {
+    .products_content_main__grid_box .main {flex-direction: column; align-items: center; width:100%}
+    .products_content_main__grid_box .main form {display: block; width: 100%}
+    .products_content_main__grid_box .main .btn {width:100%}
+    .products_content_main__grid_box .main .img {margin-right: 0}
+  }
+</style>

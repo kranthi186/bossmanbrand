@@ -1,0 +1,167 @@
+{% if product.metafields.accentuate.show_brotherhood_module %}
+    <div class="my-32 bg-cover bg-center bg-no-repeat">
+        <div class="container max-w-5xl">
+            <div class="flex flex-wrap items-center m-0 md:-mx-4">
+                <div class="w-full md:w-2/5 p-5">
+                    <div class="px-4 sm:px-10 md:px-0">
+                        <h2 class="nmr-title text-3xl leading-tight mb-5 nmr-title">{{ product.metafields.accentuate.brotherhood_title }}</h2>
+                        <div class="text-base">{{ product.metafields.accentuate.brotherhood_description }}</div>
+                    </div>
+                </div>
+
+
+                <div class="w-full md:w-3/5 px-4 flex justify-center">
+                    <div class="content relative w-full">
+                        <img data-src="{{ 'nmr-left-olive-branch.png' | asset_img_url }}" alt="" class="nmr-olive-left">
+                        <img data-src="{{ 'nmr-right-olive-branch.png' | asset_img_url }}" alt="" class="nmr-olive-right">
+                        <div class="nmr-bro-slider">
+                            {% for quote in product.metafields.accentuate.brotherhood_quote %}
+                                <div class="nmr-bro-slide">
+                                    <div class="p-5 sm:p-10">
+                                        <div class="px-6 py-8 shadow-md">
+                                            <div class="flex flex-wrap items-center -mx-4">
+                                                <div class="flex-1 px-4">
+                                                    <div class="leading-snug mb-5">"{{ quote }}"</div>
+                                                    <div class="m-0 leading-none">
+                                                        <small class="font-bold m-0">{{ product.metafields.accentuate.brotherhood_name[forloop.index0] }}</small>
+                                                    </div>
+                                                    <div class="m-0 leading-none">
+                                                        <small class="italic text-red-500 m-0">Member Since
+                                                            {{ product.metafields.accentuate.brotherhood_year[forloop.index0] }}</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+
+        .tns-outer {
+            position: relative;
+        }
+
+        .tns-nav {
+            display: none;
+        }
+
+        .tns-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99;
+
+            outline: 0;
+
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            transform: translateY(50%);
+        }
+
+        .nmr-olive-left,
+        .nmr-olive-right {
+            position: absolute;
+            bottom: 0;
+            height: 4em;
+            width: auto;
+        }
+
+        .nmr-olive-left {
+            left: 0;
+            transform: translate(18%, -20%);
+        }
+
+        .nmr-olive-right {
+            right: 0;
+            transform: translate(-18%, -20%);
+        }
+
+        button[data-controls=next],
+        button[data-controls=prev] {
+            cursor: pointer;
+            border-radius: 999999px;
+            width: 2rem;
+            height: 2rem;
+            background-color: #C0964A;
+            color: white;
+            margin: 0 0.25rem;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            outline: 0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            transform: translateY(0);
+            transition-duration: 200ms;
+        }
+
+        button[data-action=start],
+        button[data-action=stop] {
+            display: none !important;
+        }
+
+        button[data-controls=next]:hover,
+        button[data-controls=prev]:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-10%);
+        }
+
+        button,
+        button:hover,
+        button:focus,
+        button:active,
+        button .fas,
+        button:hover .fas,
+        button:focus .fas,
+        button:active .fas {
+            outline: 0 !important;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        window.addEventListener("load", function () {
+
+            var nmr_bro_slider = tns({
+                container: ".nmr-bro-slider",
+                autoplay: true,
+                mode: "gallery",
+                center: true,
+                items: 1,
+                gutter: 10,
+                controlsText: [
+                    "<i class=\"fas fa-arrow-left\"></i>", "<i class=\"fas fa-arrow-right\"></i>"
+                ],
+                autoplayButton: false,
+                mouseDrag: true
+            });
+        });
+    </script>
+{% endif %}
+
+{% schema %}
+
+{
+    "name": "NMR Module Brotherhood",
+    "tag": "section"
+}
+
+{% endschema %}
+
+<!-- 
+    - section title
+    - section desc
+    - quotes
+        - quote
+        - name
+        - member since
+ -->

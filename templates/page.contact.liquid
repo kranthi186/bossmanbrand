@@ -1,0 +1,56 @@
+{% assign youtube = "Youtube" %}
+{% assign facebook = "Facebook" %}
+{% assign instagram = "Instagram" %}
+
+<section class="contact">
+  <div class="container">
+    <div class="contact_content">
+      <div class="contact_row">
+        <div class="contact_col">
+        	{% comment %}<h1>Contact form</h1>{% endcomment %}
+            {% form 'contact' %}
+              {% assign name_attr = 'contact.form.name' | t | handle %}
+              <label>
+                <input type="text" required  onfocus="return focusEl(event);" id="ContactFormName" class="input-full" name="contact[{{ name_attr }}]" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% endif %}">
+                <div class="placeholder">Your name<span>*</span></div>	
+              </label>
+              <label>
+                  <input type="email" required  onfocus="return focusEl(event);" id="ContactFormEmail" class="input-full" name="contact[email]" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% endif %}">
+                  <div class="placeholder">E-Mail address<span>*</span></div>
+              </label>
+              {% assign name_attr = 'contact.form.phone' | t | handle %}
+              <label>
+                  <input type="tel" id="ContactFormPhone" onfocus="return focusEl(event);" class="input-full" name="contact[{{ name_attr }}]" pattern="[0-9\-]*" value="{% if form[name_attr] %}{{ form[name_attr] }}{% endif %}">
+                  <div class="placeholder">Phone number</div>	
+              </label>
+              <label>
+                  <textarea id="ContactFormMessage" required="required" onfocus="return focusEl(event);" class="input-full" name="contact[body]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+                  <div class="placeholder">Message<span>*</span></div>	
+              </label>
+              <input type="submit" class="btn right" value="Submit">
+            {% endform %}
+        </div>
+        
+        <div class="contact_col">
+          <ul>
+            <li><i class="far fa-envelope"></i><a href="mailto:stephen@bossmanbrand.com">stephen@bossmanbrand.com</a></li>
+            <li><i class="fas fa-map-marked-alt"></i>2211 S. I35 suite 204 Austin, Texas 78741</li>
+          </ul>
+          <div class="social">
+            <div class="social_info">
+              Join us in our groups where we interact daily with thousands of bearded brothers:
+            </div>
+            <div class="social_icons">
+              {% for link in linklists.social-menu.links %}
+                <a href="{{ link.url }}" class="{% if link.title == youtube %}youtube{% endif %}{% if link.title == facebook %}facebook{% endif %}{% if link.title == instagram %}instagram{% endif %}"></a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .contact i{line-height:28px;font-size:16px;padding-right:20px;}
+</style>

@@ -1,0 +1,297 @@
+{% assign tabs2 = "Stagecoach | Magic | Gold | Hammer | Naked" | split: ' | ' %}
+{% assign links2 = "jelly-beard-oil-stagecoach-scent | jelly-beard-oil-magic-scent | jelly-beard-oil-gold-scent | jelly-beard-oil-hammer-scent | jelly-beard-oil-naked-scent" | split: ' | ' %}
+{% assign content2 = "This Texas-sized blend of rugged leather, sweet tobacco, and aged Bourbon will make your beard look and smell like a gentleman as you belly up to any saloon. Saddle not required. | Warm blend of rich sandalwood and vanilla oils highlight bergamot, patchouli and frankincense accents. Our original scent, perfect for close encounters, special occasions and days when your beard needs to be as smooth as you are. | Fresh mix of woods such as Cedar, Spruce, Sandalwood with a hint of Lemon, Bergamot, Lavender, and Saffron Spice gives a clean and invigorating effect. It’s the perfect way to wake up or just feel refreshed throughout your day. | Every man's scent that just doesn't quit. Geranium and lavender are masterfully mixed with vanilla and patchouli to bring you a strong mechanical smell for the blue-collar guy. | Clean, simple, and fragrance-free. Perfect for those times when you don’t want to compete with your favorite cologne." | split: ' | ' %}
+
+{% if product.metafields.accentuate.show_product_types %}
+    <div class="my-32">
+        <div class="mb-16 md:mb-24 px-5">
+            <div class="container mx-auto">
+                <h2 class="nmr-title-dark text-4xl text-center leading-tight mb-5">{{ product.metafields.accentuate.product_types_title }}</h2>
+            </div>
+        </div>
+
+        <!-- desktop tabs -->
+        <div class="container block">
+            <div class="flex flex-wrap m-0 md:-mx-5">
+                <div class="w-full mb-5 md:mb-0 md:w-1/3 lg:w-1/4 px-5">
+                    <div id="nmr-tabs-2">
+                        {% for thing in product.metafields.accentuate.product_object %}
+                            <div key="{{ forloop.index }}" class="nmr-tab {% if forloop.index0 == 0 %}nmr-active{% endif %} flex flex-wrap items-center mb-5">
+                                <div class="nmr-tab-number shadow bg-cover bg-center bg-no-repeat" data-bg="url({{ all_products[thing].featured_image | img_url: 'medium' }})"></div>
+                                <div class="nmr-tab-title">
+                                    <h1 class="text-2xl bg-white px-5">{{ product.metafields.accentuate.product_scent[forloop.index0] }}</h1>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 lg:w-3/4 px-5">
+                    <div id="nmr-info-boxes-2">
+                        {% for thing in product.metafields.accentuate.product_object %}
+                            <div class="nmr-info-box {% unless forloop.index0 == 0 %}hidden{% endunless %}">
+                                <div class="flex flex-wrap items-center">
+                                    <div class="order-2 md:order-1 w-full sm:w-1/3 lg:2/5 order-2 sm:order-1">
+                                        <div class="nmr-image-square bg-center bg-cover bg-no-repeat" data-bg="url({{ all_products[thing].featured_image | img_url: '400x400' }})"></div>
+                                    </div>
+                                    <div class="order-1 md:order-2 w-full p-8 md:p-0 sm:w-2/3 lg:3/5 sm:pl-10 order-1 sm:order-2">
+                                        <h1 class="text-4xl nmr-title mb-5">{{ all_products[thing].title }}</h1>
+                                        <div class="nmr-para text-lg leading-snug mb-2">
+                                            {% if product.metafields.accentuate.product_type_description[forloop.index0] %}
+                                                {{ product.metafields.accentuate.product_type_description[forloop.index0] }}
+                                            {% else %}
+                                                {{ all_products[thing].content | strip_html | truncate: 350 }}
+                                            {% endif %}
+                                            <br><br>
+                                            <a class="uppercase tracking-widest font-bold" href="{{ all_products[thing].url }}" style="color:#C0964A">
+                                                <span class="mr-1 hover:mr-2">Try out {{ all_products[thing].title }}</span>
+                                                <i class="fas fa-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end desktop tabs -->
+    </div>
+{% endif %}
+
+<style>
+
+    #nmr-tabs-2 {
+        position: relative;
+    }
+
+    #nmr-tabs-2:after {
+        content: "";
+        width: 1px;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        left: 1.75rem;
+        transform: translateX(-50%);
+        z-index: -1;
+
+        background-color: #EA1212;
+    }
+
+    .nmr-tab-number,
+    .nmr-tab-title {
+        font-family: "Abril Fatface", serif !important;
+    }
+
+    .nmr-tab {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .nmr-tab .nmr-tab-number,
+    .nmr-tab .nmr-tab-title h1,
+    .nmr-tab:after {
+        transition-duration: 300ms;
+        transition-timing-function: ease-in-out;
+    }
+
+    .nmr-tab .nmr-tab-number {
+        height: 3.5rem;
+        width: 3.5rem;
+        border-radius: 99999px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: #8D8D8B;
+
+        /* background-color: #FFF !important; */
+    }
+/* 
+    .nmr-tab.nmr-active .nmr-tab-number {
+        background-color: #E7E3E1 !important;
+    }
+    */
+
+    .nmr-tab .nmr-tab-number,
+    .nmr-tab .nmr-tab-title h1 {
+        color: #E7E3E1;
+    }
+
+    .nmr-tab:hover .nmr-tab-number,
+    .nmr-tab:hover .nmr-tab-title h1 {
+        color: #8D8D8B !important;
+    }
+
+    .nmr-tab.nmr-active .nmr-tab-number,
+    .nmr-tab.nmr-active .nmr-tab-title h1 {
+        color: #C0964A !important;
+    }
+
+    .nmr-tab:after {
+        content: "";
+        height: 2px;
+        position: absolute;
+        width: 0;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+
+    .nmr-tab:hover:after,
+    .nmr-tab.nmr-active:after {
+        width: 50%;
+    }
+
+    .nmr-tab:hover:after {
+        background-color: #E7E3E1;
+    }
+
+    .nmr-tab.nmr-active:after {
+        background-color: #C0964A;
+    }
+
+    /* button css */
+    .nmr-classy-butt-2 {
+        background-color: #C0964A;
+        position: relative;
+    }
+
+    .nmr-classy-butt-2 .stripe,
+    .nmr-classy-butt-2 .stripe2 {
+        width: 10px;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        transform: skewX(-20deg);
+    }
+
+    .nmr-classy-butt-2 .stripe {
+        left: calc(0.5rem + 10px);
+    }
+
+    .nmr-classy-butt-2 .stripe2 {
+        left: calc(0.5rem + 22px);
+    }
+
+    /* @media (min-width: 640px) { ... } */
+
+    /* Medium (md) */
+    @media (max-width: 768px) {
+        #nmr-tabs-2 {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #nmr-tabs-2:after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            top: 0;
+            height: 1px;
+            top: 1.75rem;
+            left: 0;
+            transform: translateX(0) translateY(-50%);
+            z-index: -1;
+
+            background-color: #EA1212;
+        }
+
+    }
+
+    /* Large (lg) */
+    /* @media (min-width: 1024px) { ... } */
+
+    /* Extra Large (xl) */
+    /* @media (min-width: 1280px) { ... } */
+</style>
+
+<script type="text/javascript">
+    var tabs2 = document.querySelectorAll("#nmr-tabs-2 .nmr-tab");
+    var boxes2 = document.querySelectorAll("#nmr-info-boxes-2 .nmr-info-box");
+
+    var tabs2_mobile = document.querySelectorAll("#nmr-tabs-2-mobile .nmr-tab");
+
+    function activateTab2(current_index, mobile = false) { // check if input is greater than number of tabs
+
+        if (mobile) {
+            var tab_count = tabs2_mobile.length;
+            if (current_index < tab_count) {
+                for (var i = 0; i < tab_count; i++) {
+                    if (i != current_index) {
+                        tabs2_mobile[i].classList.remove("nmr-active");
+                        tabs2_mobile[i]
+                            .nextElementSibling
+                            .classList
+                            .add("hidden");
+                    } else {
+                        tabs2_mobile[i].classList.add("nmr-active");
+                        tabs2_mobile[i]
+                            .nextElementSibling
+                            .classList
+                            .remove("hidden");
+                    }
+                }
+            }
+        } else {
+            var tab_count = tabs2.length;
+            if (current_index < tab_count) {
+                for (var i = 0; i < tab_count; i++) {
+                    if (i != current_index) {
+                        tabs2[i].classList.remove("nmr-active");
+                        boxes2[i].classList.add("hidden");
+                    } else {
+                        tabs2[i].classList.add("nmr-active");
+                        boxes2[i].classList.remove("hidden");
+                    }
+                }
+            }
+        }
+
+        return current_index;
+    }
+
+    for (var i = 0; i < tabs2.length; i++) {
+        tabs2[i].onclick = function () {
+            activateTab2(Number.parseInt(this.getAttribute("key")) - 1);
+        }
+    }
+
+    for (var x = 0; x < tabs2_mobile.length; x++) {
+        tabs2_mobile[x].onclick = function (e) {
+            activateTab2(Number.parseInt(this.getAttribute("key")), true);
+        }
+    }
+
+
+    // button click trig
+    var butt2 = document.querySelectorAll(".nmr-classy-butt-2");
+
+    for (var x = 0; x < butt.length; x++) {
+        butt2.onclick = function () {
+            console.log(this);
+        }
+    }
+</script>
+
+
+{% schema %}
+
+{
+    "name": "NMR Module Stages",
+    "tag": "section"
+}
+
+{% endschema %}
+
+<!-- 
+    - section title
+    - tabs
+        - scent
+        - product
+            - product.url
+            - product.image
+ -->

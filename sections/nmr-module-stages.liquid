@@ -1,0 +1,341 @@
+
+{% if product.metafields.accentuate.show_stages_module %}
+
+{% for col in product.collections %}
+    {% if col.handle contains 'stage-' %}
+    {% assign stage = col.handle | replace: "stage-", "" | plus: 0 %}
+    {% endif %}
+{% endfor %}
+
+<div class="my-32">
+    <div class="mb-10 md:mb-24 px-5">
+        <h2 class="nmr-title text-4xl text-center leading-tight">
+            {{ product.metafields.accentuate.stage_module_title }}
+        </h2>
+    </div>
+
+    <!-- desktop "tabs" -->
+    <div class="container" id="stages">
+        <div class="flex flex-wrap m-0 md:-mx-5">
+            <div class="w-full mb-5 md:mb-0 md:w-1/3 lg:w-2/5 px-5">
+                <div id="nmr-tabs">
+                    {% for title in product.metafields.accentuate.stage_title %}
+                        <div key="{{ forloop.index }}" class="nmr-tab {% if forloop.index == stage %}nmr-active{% endif %} flex flex-wrap items-center mb-10">
+                            <div class="nmr-tab-number flex flex-wrap items-center justify-center">
+                                <div class="text-4xl">{{ forloop.index }}</div>
+                            </div>
+                            <div class="nmr-tab-title">
+                                <h1 class="text-2xl bg-white px-5">{{ title }}</h1>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="w-full md:w-2/3 lg:w-3/5 px-5">
+                <div id="nmr-info-boxes">
+                    {% for desc in product.metafields.accentuate.stage_description %}
+                        <div key="{{ forloop.index }}" class="nmr-info-box {% unless forloop.index == stage %}hidden{% endunless %}">
+                            <div class="content p-8 md:p-0">
+                                <div class="w-full mb-20 bg-white">
+                                    <h1 class="block md:hidden text-4xl nmr-title mb-5">{{ product.metafields.accentuate.stage_title[forloop.index0] }}</h1>
+                                    <div class="text-lg font-light mb-10">{{ desc | strip_html }}</div>
+                                    <a class="nmr-classy-butt inline-block pl-12 pr-5 py-3 text-white font-bold text-xs md:text-base tracking-widest leading-none rounded shadow hover:shadow-lg uppercase" href="{{ collections[product.metafields.accentuate.stage_collection[forloop.index0]].url }}">
+                                        <div class="stripe bg-red-700"></div>
+                                        <div class="stripe2 bg-gray-700"></div>
+                                        Shop All Stage
+                                        {{ forloop.index }}
+                                        Products
+                                        <i class="fas fa-arrow-right ml-2" style="font-size: inherit"></i>
+                                    </a>
+                                </div>
+                                <div class="w-full">
+                                    <div class="flex flex-wrap justify-center -mx-4">
+                                        {% for thing in collections[product.metafields.accentuate.stage_collection[forloop.index0]].products limit:3 %}
+                                        <a href="{{ thing.url }}" class="w-full sm:w-1/2 md:w-1/3 px-4 md:px-6 lg:px-10">
+                                            <div class="combo mb-10 md:mb-0">
+                                                <div class="nmr-image-square bg-center bg-contain bg-no-repeat" data-bg="url({{ thing.featured_image | img_url: 'large' }})"></div>
+                                                <div class="mt-5 mb-2 tracking-widest uppercase font-bold text-sm text-center leading-snug">{{ thing.title }}</div>
+                                                <div class="text-sm font-bold flex justify-center items-center">
+                                                    <div class="text-red-500 mr-2">
+                                                        {{ thing.price | money }}
+                                                        <i class="fas fa-arrow-circle-right" style="color: #C0964A !important"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end desktop "tabs" -->
+</div>
+{% endif %}
+
+<style type="text/css">
+
+    #nmr-tabs,
+    #nmr-tabs-mobile {
+        position: relative;
+    }
+
+    #nmr-tabs:after,
+    #nmr-tabs-mobile:after {
+        content: "";
+        width: 1px;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        left: 1.75rem;
+        transform: translateX(-50%);
+        z-index: -1;
+
+        background-color: #EA1212;
+    }
+
+    .nmr-tab-number,
+    .nmr-tab-title {
+        font-family: "Abril Fatface", serif !important;
+    }
+
+    .nmr-tab {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .nmr-tab .nmr-tab-number,
+    .nmr-tab .nmr-tab-title h1,
+    .nmr-tab:after {
+        transition-duration: 300ms;
+        transition-timing-function: ease-in-out;
+    }
+
+    .nmr-tab .nmr-tab-number {
+        height: 3.5rem;
+        width: 3.5rem;
+        border-radius: 99999px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color:#DEDAD7 !important;
+            color: #7A7A78 !important
+    }
+
+    .nmr-tab.nmr-active .nmr-tab-number {
+        background-color: #283227 !important;
+            color: #fff !important
+    }
+
+    .nmr-tab:hover .nmr-tab-number,
+    .nmr-tab:hover .nmr-tab-title h1 {
+        color: #8D8D8B !important;
+    }
+
+    .nmr-tab.nmr-active .nmr-tab-number,
+    .nmr-tab.nmr-active .nmr-tab-title h1 {
+        color: #C0964A !important;
+    }
+
+    .nmr-tab:after {
+        content: "";
+        height: 2px;
+        position: absolute;
+        width: 0;
+        top: 50%;`
+        right: 0;
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+
+    .nmr-tab:hover:after,
+    .nmr-tab.nmr-active:after {
+        width: 50%;
+    }
+
+    .nmr-tab:hover:after {
+        background-color: #E7E3E1;
+    }
+
+    .nmr-tab.nmr-active:after {
+        background-color: #C0964A;
+    }
+
+    /* button css */
+    .nmr-classy-butt {
+        background-color: #C0964A;
+        position: relative;
+    }
+
+    .nmr-classy-butt .stripe,
+    .nmr-classy-butt .stripe2 {
+        width: 10px;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        transform: skewX(-20deg);
+    }
+
+    .nmr-classy-butt .stripe {
+        left: calc(0.5rem + 10px);
+    }
+
+    .nmr-classy-butt .stripe2 {
+        left: calc(0.5rem + 22px);
+    }
+
+    /* mobile tabs */
+    #nmr-tabs-mobile .nmr-tab + .nmr-info-box {
+        transition: max-height 300ms;
+        
+        overflow: hidden;
+        
+        height: auto;
+        display: block !important;
+        max-height: 0;
+    }
+    
+    #nmr-tabs-mobile .nmr-tab.nmr-active + .nmr-info-box {
+        transition: max-height 300ms;
+        max-height: 500px;
+    }
+
+    @media (max-width: 768px) {
+        #nmr-tabs {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #nmr-tabs:after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            top: 0;
+            height: 1px;
+            top: 1.75rem;
+            left: 0;
+            transform: translateX(0) translateY(-50%);
+            z-index: -1;
+
+            background-color: #EA1212;
+        }
+
+        .nmr-tab-number,
+        .nmr-tab-title {
+            font-family: "Abril Fatface", serif !important;
+        }
+
+        .nmr-tab {
+            cursor: pointer;
+        }
+
+        .nmr-tab .nmr-tab-number {
+            height: 3.5rem;
+            width: 3.5rem;
+            border-radius: 99999px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nmr-tab .nmr-tab-title {
+            display: none;
+        }
+
+        .nmr-tab:after {
+            display: none;
+        }
+
+        .nmr-tab.nmr-active .nmr-tab-number {
+            border: solid 2px;
+        }
+
+        .nmr-info-box {
+            border: solid 1px #C0964A;
+            border-radius: 0.5em;
+            padding-bottom: 1em;
+        }
+    }
+</style>
+
+<script type="text/javascript">
+    var tabs = document.querySelectorAll("#nmr-tabs .nmr-tab");
+    var boxes = document.querySelectorAll("#nmr-info-boxes .nmr-info-box");
+
+    var tabs_mobile = document.querySelectorAll("#nmr-tabs-mobile .nmr-tab");
+
+    function activateTab(current_index, mobile) { // check if input is greater than number of tabs
+
+        if (mobile) {
+            var tab_count = tabs_mobile.length;
+            if (current_index < tab_count) {
+
+                for (var i = 0; i < tab_count; i++) {
+                    if (i != current_index) {
+                        tabs_mobile[i].classList.remove("nmr-active");
+                        tabs_mobile[i].nextElementSibling.classList.add("hidden");
+                    } else {
+                        tabs_mobile[i].classList.add("nmr-active");
+                        tabs_mobile[i].nextElementSibling.classList.remove("hidden");
+                    }
+                }
+
+            }
+        } else {
+            var tab_count = tabs.length;
+            if (current_index < tab_count) {
+
+                for (var i = 0; i < tab_count; i++) {
+                    if (i != current_index) {
+                        tabs[i].classList.remove("nmr-active");
+                        boxes[i].classList.add("hidden");
+                    } else {
+                        tabs[i].classList.add("nmr-active");
+                        boxes[i].classList.remove("hidden");
+                    }
+                }
+
+            }
+        }
+
+        return current_index;
+    }
+
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].onclick = function () {
+            activateTab(Number.parseInt(this.getAttribute("key")) - 1, false);
+        }
+    }
+
+    for (var x = 0; x < tabs_mobile.length; x++) {
+        tabs_mobile[x].onclick = function (e) {
+            activateTab(Number.parseInt(this.getAttribute("key")), true);
+        }
+    }
+
+    // button click trig
+    var butt = document.querySelectorAll(".nmr-classy-butt");
+
+    for (var x = 0; x < butt.length; x++) {
+        butt.onclick = function () {
+            console.log(this);
+        }
+    }
+</script>
+
+
+{% schema %}
+{
+    "name": "NMR Module Stages",
+    "tag": "section"
+}
+{% endschema %}

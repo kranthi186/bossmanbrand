@@ -1,0 +1,805 @@
+<!-- Nimaroh Scripts -->
+{{ 'https://cdn.jsdelivr.net/npm/intersection-observer@0.7.0/intersection-observer.js' | script_tag }}
+{{ 'https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.4.0/dist/lazyload.min.js' | script_tag }}
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js' | script_tag }}
+
+{{ 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&display=swap' | stylesheet_tag }}
+{{ 'https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css' | stylesheet_tag }}
+
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/tiny-slider.css' | stylesheet_tag }}
+{{ 'https://kit.fontawesome.com/03d678043b.js' | script_tag }}
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js' | script_tag }}
+<!-- end Nimaroh Scripts -->
+
+<style type="text/css">
+    .zoomImg {
+        cursor: zoom-in;
+        z-index: 9999;
+    }
+    #p_prldr {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: #fff;
+        z-index: 30;
+    }
+
+    .contpre small {
+        font-size: 25px;
+    }
+
+    .contpre {
+        width: 250px;
+        height: 100px;
+        position: absolute;
+        left: 50%;
+        top: 48%;
+        margin-left: -125px;
+        margin-top: -75px;
+        color: #000;
+        font-size: 40px;
+        letter-spacing: -2px;
+        text-align: center;
+        line-height: 35px;
+    }
+
+    #p_prldr .svg_anm {
+        position: absolute;
+        left: 85px;
+        top: -75px;
+        width: 100px;
+        height: 100px;
+        background: url("https://cdn.shopify.com/s/files/1/2283/7011/files/loader.svg?13115825395909862047") center center no-repeat;
+        background-size: 100px;
+        margin: -16px 0 0 -16px;
+    }
+    #p_prldr .loader_text {
+        margin-top: 10px;
+    }
+    @media all and(max-width:768px) {
+        #smile-ui-container {
+            display: none !important;
+        }
+    }
+</style>
+<div id="p_prldr">
+    <div class="contpre">
+        <span class="svg_anm"></span>
+        <span class="loader_text">Loading...<br><small>please wait</small>
+        </span>
+    </div>
+</div>
+<script type="text/javascript">
+    $(window).on("load", function () {
+        var $preloader = $("#p_prldr"),
+            $svg_anm = $preloader.find(".svg_anm");
+        $svg_anm.fadeOut();
+        $preloader.delay(500).fadeOut("slow");
+    });
+</script>
+
+{%- include 'bold-ro' -%}
+{%- include 'bold-product' with product, hide_action: 'break', output: 'none' -%}
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+    {% assign on_sale = true %}
+{% endif %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+
+<meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+<meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+
+<section class="product_more">
+    <div class="container">
+        <div class="product_more_content">
+            <div class="h-product-info">
+                <div class="head">
+                    <div class="buyinfo">
+                        <div class="info">
+                            <h2>{{ product.title }}</h2>
+
+                            <div class="pricereview product-desktop">
+                                <span class="price">
+                                    {% if on_sale %}
+                                        <span>{{ product.price | money }}</span>
+                                        <span class="sale">{{ product.compare_at_price | money }}</span>
+                                    {% else %}
+                                        <span>{{ product.price | money }}</span>
+                                    {% endif %}
+                                </span>
+                                <div class="review">
+                                    {% include 'okendo-reviews-product-rating-summary' %}
+                                </div>
+                            </div>
+                            {% if current_variant.inventory_quantity > 0 %}
+                                <span class="stock">In stock</span>
+                            {% else %}
+                                <span class="stock none">Out of stock</span>
+                            {% endif %}
+                        </div>
+                        <div class="foto">
+                            <div class="flexslider" id="slider">
+                                <ul class="slides">
+                                    {% for image in product.images %}
+                                        <li>
+                                            <img class="image-zoom" src="{{ image.src| img_url: '1024x1024', scale: 2 }}" alt="{{ image.alt | escape }}">
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="flexslider" id="carousel">
+                                <ul class="slides">
+                                    {% for image in product.images %}
+                                        <li>
+                                            <img src="{{ image.src | img_url: '110x' }}" alt="{{ image.alt | escape }}">
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="info product-mobile">
+                            <div class="pricereview">
+                                <span class="price">
+                                    {% if on_sale %}
+                                        <span>{{ product.price | money }}</span>
+                                        <span class="sale">{{ product.compare_at_price | money }}</span>
+                                    {% else %}
+                                        <span>{{ product.price | money }}</span>
+                                    {% endif %}
+                                </span>
+                                <div class="review">
+                                    {% include 'okendo-reviews-product-rating-summary' %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {% include 'product-variations' %}
+
+                        <div id="product-options">
+
+                            <form action="/cart/add" class="form-vertical" enctype="multipart/form-data" id="AddToCartForm" method="post">
+                                <div class="ro_widget"></div>
+
+                                <div class="label_bundle">
+
+                                    <label>{{ product.options.first }}</label>
+
+                                    <select class="product-single__variants" id="productSelect" name="id">
+                                        {% for variant in product.variants %}
+                                            {% if variant.available %}
+                                                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}
+                                                    -
+                                                    {{ variant.price | money_with_currency }}</option>
+                                            {% else %}
+                                                <option disabled="disabled">{{ variant.title }}
+                                                    -
+                                                    {{ 'products.product.sold_out' | t }}</option>
+                                            {% endif %}pro_add_cart
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+                                <div class="qty_and_addtocart desktop">
+                                    <!--input type="hidden" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector"-->
+                                    <div class="label_quantity">
+                                        <label>Quantity</label><input class="quantity-selector" id="Quantity" min="1" name="quantity" type="number" value="1"></div>
+                                    <div class="cart_onload_button">
+                                        <button type="submit" name="add" id="AddToCart" class="btn addtocart change_text_after_added desktop" {% if product.available != true %} disabled style="background-color:gray;" {% endif %}>
+                                            {% if product.available != true %}Out of stock{% else %}Add to cart
+                                            {% endif %}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="pro_add_cart sticky-button activated">
+
+                                    <div class="sticky_add_cart_details">
+
+                                        <img src="{{ product.featured_image | img_url: '110x' }}" alt="">
+
+                                        <div class="info product-mobile">
+                                            <div class="pricereview">
+                                                <span class="price">
+                                                    {% if on_sale %}
+                                                        <span>{{ product.price | money }}</span>
+                                                        <span class="sale">{{ product.compare_at_price | money }}</span>
+                                                    {% else %}
+                                                        <span>{{ product.price | money }}</span>
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sticky_button_cart">
+                                        <button class="btn addtocart change_text_after_added" id="AddToCart" name="add" type="submit">Add to cart</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div class="product_guarantee-box">
+
+                            {% section 'guarantee-box' %}
+
+                        </div>
+                        
+                        {% unless show_modules == true %}
+      
+                            <div class="tabs" style="display: none">
+                                <div class="tabs_content">
+                                    <div id="descr" class="watch"><p>{{ product.description }}</p></div>
+                                    <div class="btn_wrap">
+                                        <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="form-vertical">
+                                            <select name="id" id="productSelect" class="product-single__variants"  style="display:none;">
+                                                {% for variant in product.variants %}
+                                                {% if variant.available %}
+                                                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                                                {% else %}
+                                                <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+                                            <button type="submit" name="add" id="AddToCart" class="btn">Add to cart</button>
+                                        </form>
+                                        <div style="display:none" class="gwbutton">Gift Instantly</div>  
+                                    </div>
+                                </div>
+                            </div>
+                        {% endunless %}
+
+                    </div>
+                </div>
+            </div>
+            {% include 'hypervisual' %}
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $(window).load(function () { // The slider being synced must be initialized first
+        $("#carousel").flexslider({
+            animation: "slide",
+            controlNav: false,
+            animationLoop: false,
+            slideshow: false,
+            itemWidth: 110,
+            itemMargin: 5,
+            asNavFor: "#slider"
+        });
+
+        $("#slider").flexslider({
+            animation: "slide",
+            controlNav: false,
+            animationLoop: false,
+            slideshow: false,
+            sync: "#carousel",
+            start: function () {
+                $(".flex-active-slide").zoom();
+            },
+            before: function () {
+                $(".flex-active-slide").trigger("zoom.destroy");
+            },
+            after: function () {
+                $(".flex-active-slide").zoom();
+            }
+        });
+    });
+</script>
+
+<!-- Nimaroh Coded Sections -->
+<style type="text/css">
+    html {
+        font-family: 'Roboto', sans-serif !important;
+        font-size: 16px !important;
+        font-weight: 300 !important;
+        background-image: none !important;
+    }
+    
+    .nmr-title,
+    .nmr-title-dark,
+    .nmr-title-light {
+        color: #C0964A;
+        font-family: 'Abril Fatface', sans-serif;
+        /* margin-bottom: 0.5rem; */
+    }
+
+    .nmr-title-dark {
+        color: #374437;
+    }
+
+    .nmr-title-light {
+        color: #ffffff;
+    }
+
+
+    .nmr-image:after,
+    .nmr-image-square:after {
+        display: block;
+        width: 100%;
+        content: '';
+    }
+
+    .nmr-image:after {
+        padding-top: 150%;
+    }
+
+    .nmr-image-square:after {
+        padding-top: 100%
+    }
+
+    main .fas, .far {
+        font-size: inherit !important;
+        color: inherit !important;
+    }
+    
+    main button .fas {
+        font-size: 0.8rem;
+    }
+</style>
+
+<!-- Start Nimaroh Coded Sections -->
+{% include 'nmr-divider' %}
+{% section 'nmr-module-product-info' %}
+{% section 'nmr-module-videos' %}
+{% section 'nmr-module-stages' %}
+{% section 'nmr-module-banner' %}
+{% section 'nmr-module-banner-dual' %}
+{% section 'nmr-module-testimonials' %}
+{% section 'nmr-module-brotherhood' %}
+{% section 'nmr-module-product-types' %}
+{% section 'nmr-module-more-about' %}
+{% section 'nmr-module-combos' %}
+<!-- End Nimaroh Coded Sections -->
+
+<section style="margin: 5em 0">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    {% include 'okendo-reviews-widget' %}
+  </div>
+</section>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    var slate = [];
+    slate.utils = {
+    findInstance: function(array, key, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][key] === value) {
+                return array[i];
+            }
+        }
+    },
+    removeInstance: function(array, key, value) {
+        var i = array.length;
+            while(i--) {
+            if (array[i][key] === value) {
+                array.splice(i, 1);
+                break;
+            }
+        }
+
+        return array;
+    },
+    compact: function(array) {
+        var index = -1;
+        var length = array == null ? 0 : array.length;
+        var resIndex = 0;
+        var result = [];
+
+        while (++index < length) {
+        var value = array[index];
+        if (value) {
+            result[resIndex++] = value;
+        }
+        }
+        return result;
+    },
+    defaultTo: function(value, defaultValue) {
+        return (value == null || value !== value) ? defaultValue : value
+    }
+    };
+    slate.Currency = (function() {
+    var moneyFormat = '${{amount}}';
+    function formatMoney(cents, format) {
+        if (typeof cents === 'string') {
+        cents = cents.replace('.', '');
+        }
+        var value = '';
+        var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+        var formatString = (format || moneyFormat);
+
+        function formatWithDelimiters(number, precision, thousands, decimal) {
+        precision = slate.utils.defaultTo(precision, 2);
+        thousands = slate.utils.defaultTo(thousands, ',');
+        decimal = slate.utils.defaultTo(decimal, '.');
+
+        if (isNaN(number) || number == null) {
+            return 0;
+        }
+
+        number = (number / 100.0).toFixed(precision);
+
+        var parts = number.split('.');
+        var dollarsAmount = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands);
+        var centsAmount = parts[1] ? (decimal + parts[1]) : '';
+
+        return dollarsAmount + centsAmount;
+        }
+
+        switch (formatString.match(placeholderRegex)[1]) {
+        case 'amount':
+            value = formatWithDelimiters(cents, 2);
+            break;
+        case 'amount_no_decimals':
+            value = formatWithDelimiters(cents, 0);
+            break;
+        case 'amount_with_space_separator':
+            value = formatWithDelimiters(cents, 2, ' ', '.');
+            break;
+        case 'amount_no_decimals_with_comma_separator':
+            value = formatWithDelimiters(cents, 0, ',', '.');
+            break;
+        case 'amount_no_decimals_with_space_separator':
+            value = formatWithDelimiters(cents, 0, ' ');
+            break;
+        }
+
+        return formatString.replace(placeholderRegex, value);
+    }
+
+    return {
+        formatMoney: formatMoney
+    };
+    })();
+    
+    var prodJSON = JSON.parse("{{ product | json }}");
+    var priceBlock = $('.product_more_content .head .buyinfo .info .pricereview .price span:not(.sale)');
+    var oldPiceBlock = $('.product_more_content .head .buyinfo .info .pricereview .price .sale');
+    $('#productSelect').on('change', function() {
+        var variant = $(this).val();
+        for(var i = 0; i < prodJSON.variants.length; i++) {
+            if(variant == prodJSON.variants[i].id) {
+                varFind = prodJSON.variants[i];
+                priceBlock.html(slate.Currency.formatMoney(varFind.price, '{{ shop.money_format }}'));
+                if(varFind.compare_at_price) {
+                    oldPiceBlock.html(slate.Currency.formatMoney(varFind.compare_at_price, '{{ shop.money_format }}'));
+                    oldPiceBlock.show();
+                }
+                else oldPiceBlock.hide();
+            }
+        }
+    });
+    });
+</script>
+
+
+<style type="text/css">
+    .stock.none:before {
+        background-color: #ee2445 !important
+    }
+
+    .bold-ro__recurring-title {
+        color: #ee2445;
+        font-size: 20px;
+        letter-spacing: 0.8px;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    .bold-ro__one-time-div,
+    .bold-ro__recurring-div,
+    .bold-ro__mix-div {
+        ;
+        /*padding: 10px;*/
+    }
+    .product_more_content .head .buyinfo form label {
+        display: -webkit-box;
+    }
+    .bold-ro__bold-active label:before {
+        background-color: #ee2445;
+    }
+    .product_more_content .head .buyinfo .info .pricereview .review .spr-badge .spr-badge-caption {
+        font-family: "PT Sans", sans-serif !important;
+        font-style: italic !important;
+        font-size: 14px !important;
+        margin-top: 5px !important;
+    }
+    .product_more_content .head .buyinfo .foto .big {
+        height: 419px
+    }
+    @media only screen and(max-width: 480px) {
+        .product_more_content .head .buyinfo {
+            grid-template-columns: 100%;
+            grid-row-gap: 40px;
+            grid-template-areas: "info" "foto" "form";
+            align-items: center;
+        }
+        .product_more_content .tabs_head {
+            grid-template-columns: 1fr;
+        }
+        .product_more_content .tabs_head div.active {
+            border-bottom: 1px solid #e5e5e5
+        }
+        .product_more_content .tabs_head div {
+            border-left: 1px solid #e5e5e5;
+            border-top: 1px solid #e5e5e5;
+        }
+        .product_more_content .tabs_content {
+            padding: 0;
+            border: none;
+            margin-top: 30px;
+        }
+        .product_more_content .tabs_content .btn_wrap {
+            display: block;
+            width: 100%;
+        }
+        .product_more_content .tabs_content .btn_wrap .btn {
+            width: 100%
+        }
+        .product_more_content .videos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .product_more_content .head .buyinfo form {
+            margin-top: 0 !important
+        }
+        .product_more_content .head .buyinfo .info {
+            flex-direction: column;
+            align-items: center
+        }
+        .product_more_content .head .buyinfo .info .stock {
+            justify-content: center
+        }
+    }
+    @media only screen and(max-width: 320px) {
+        .product_more_content .head .buyinfo form {
+            margin-top: 0 !important
+        }
+        .product_more_content .head .buyinfo .foto .big {
+            height: auto
+        }
+    }
+    .jdgm-star {
+        font-family: "JudgemeStar" !important;
+    }
+
+    #widgets {
+        display: none;
+    }
+    .product-mobile {
+        display: none !important;
+    }
+    .product-desktop {
+        display: block !important;
+    }
+    @media all and(max-width: 768px) {
+        #widgets {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 68px;
+            z-index: 100000;
+            display: none;
+            line-height: normal;
+            background-color: #05901f;
+        }
+        #widgets .widget-btn {
+            width: 100%; /*border-top:2px solid #fff;*/
+        }
+        #widgets .add-to-cart-widget {
+            height: 40px;
+        }
+        #widgets .cart-count-widget {
+            height: 40px;
+        }
+        #widgets .widget-btn.add-to-cart-widget span {
+            color: #fff;
+            font-size: 18px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            line-height: 40px;
+            font-weight: bold;
+        }
+        #widgets .cart_block_wrap {
+            line-height: 40px;
+        }
+        #widgets .cart_block_wrap .count {
+            color: #fff;
+            line-weight: bold;
+            font-size: 18px;
+        }
+        .product-mobile {
+            display: block !important;
+        }
+        .product-desktop {
+            display: none !important;
+        }
+
+
+    }
+    #shopify-section-footer .cart_block {
+        display: none;
+    }
+
+    .bottom_mobile_add_to_cart {
+        color: #fff;
+        font-size: 22px;
+        text-shadow: 1px 1px 1px black;
+        letter-spacing: 0;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        line-height: 68px;
+        font-weight: bold;
+    }
+
+    .pro_add_cart.sticky-button {
+        display: none;
+    }
+    @media(max-width: 768px) {
+
+        .pro_add_cart.sticky-button {
+            display: block;
+        }
+
+        .sticky_button_cart_style2 {
+            width: 45%;
+            float: left;
+        }
+
+        .pro_cart_img_price {
+            width: 55%;
+            float: left;
+            text-align: left;
+            display: flex;
+        }
+
+        .pro_cart_img_price .cart_pro_img {
+            width: 30%;
+            float: left;
+        }
+
+        .pro_cart_img_price .sticky_cart_pro_price {
+            width: 60%;
+            float: left;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin-left: 10%;
+        }
+
+        .pro_cart_img_price .sticky_cart_pro_price p {
+            margin-bottom: 0;
+            font-weight: 600 !important;
+            font-size: 18px !important;
+            color: #000;
+        }
+
+        .sticky_button_cart_style2 button {
+            border-radius: 6px;
+            padding: 15px 20px;
+            font-weight: bold !important;
+            letter-spacing: normal;
+            font-family: "AvertaPE-Semibold", "Open Sans", Helvetica, Arial, Lucida, sans-serif !important;
+        }
+
+        .pro_add_cart.sticky-button.activated {
+            display: block;
+            position: fixed !important;
+            bottom: 0;
+            width: 100% !important;
+            left: 0;
+            z-index: 99;
+            background: #fff;
+            padding: 15px !important;
+            text-align: right;
+            -webkit-box-shadow: 0 -2px 5px 0 #b8b8b8;
+            -moz-box-shadow: 0 -2px 5px 0 #b8b8b8;
+            box-shadow: 0 -2px 5px 0 #b8b8b8;
+        }
+
+        .product-single #AddToCartForm #AddToCart {
+            width: 100%;
+            font-size: 18px;
+        }
+        .product-single #AddToCartForm #AddToCart {
+            background-color: #92c45d;
+        }
+        #AddToCart {
+            color: #fff;
+        }
+
+        .pro_cart_img_price {
+            width: 50%;
+            display: flex;
+        }
+
+        .sticky_button_cart_style2 {
+            width: 50%;
+        }
+
+        .pro_cart_img_price .cart_pro_img {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pro_add_cart.sticky-button.activated {
+            display: none;
+        }
+
+        .pro_add_cart.sticky-button.activated span {
+            white-space: normal;
+            word-break: break-word;
+        }
+        .sticky_add_cart_details img {
+            float: left;
+            max-width: 35%;
+            width: 100%;
+        }
+
+        .product_more_content .head .buyinfo .info .pricereview .price span {
+            line-height: 35px;
+            font-size: 20px;
+        }
+
+        .sticky_button_cart button#AddToCart {
+            padding: 15px;
+            width: calc(100% - 15px);
+            font-size: 15px;
+            max-width: 100%;
+        }
+
+        .sticky_add_cart_details {
+            width: 40%;
+        }
+
+        #product-options .info.product-mobile {
+            float: left !important;
+            width: 50% !important;
+        }
+
+        .product_more_content .head .buyinfo .info .pricereview .price .sale {
+            line-height: 20px;
+            font-size: 17px;
+        }
+
+        .sticky_button_cart {
+            width: 60%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+    }
+</style>
+
+{% unless product.variants.size > 1 %}
+        <style type="text/css"> 
+          .label_bundle label,
+            .label_bundle select {
+                display: none !important;
+            }
+        </style>
+{% endunless %}
+
+{% include 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true, auto_install: true %}
+
+<!-- Nimaroh Footer scripts -->
+<script type="text/javascript">
+    var lazyloadBg = new LazyLoad({
+        elements_selector: "[data-bg]"
+    });
+
+    var lazyloadImg = new LazyLoad({
+        elements_selector: "[data-src]"
+    });
+</script>
+<!-- end Nimaroh Footer scripts -->

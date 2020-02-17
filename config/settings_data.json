@@ -1,0 +1,238 @@
+{
+  "current": {
+    "color_primary": "#747474",
+    "color_secondary": "#bbb",
+    "color_borders": "#e5e5e5",
+    "color_body_bg": "#000000",
+    "color_body_text": "#ffffff",
+    "color_footer_bg": "#000000",
+    "color_footer_text": "#ffffff",
+    "color_footer_social_link": "#bbbbbb",
+    "logo_use_image": false,
+    "logo_max_width": "450",
+    "favicon_enable": true,
+    "footer_social_enable": true,
+    "footer_newsletter_enable": true,
+    "newsletter_form_action": "",
+    "cart_notes_enable": true,
+    "cart_vendor_enable": false,
+    "ajax_cart_method": "drawer",
+    "social_twitter_link": "",
+    "social_facebook_link": "",
+    "recurring-orders-loading": "Loading subscription info...",
+    "recurring-orders-inherit-classes": false,
+    "recurring-orders-additional-button-classes": "",
+    "checkout_header_image": "",
+    "checkout_use_storefront_logo": false,
+    "checkout_logo_image": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#197bbd",
+    "checkout_button_color": "#197bbd",
+    "checkout_error_color": "#e32c2b",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "main_menu": "main-menu",
+          "mobile_main_menu": "main-menu",
+          "cart_total_bg_color": "#05901f"
+        }
+      },
+      "video": {
+        "type": "video",
+        "settings": {}
+      },
+      "ourbrothers": {
+        "type": "ourbrothers",
+        "settings": {}
+      },
+      "rewards": {
+        "type": "rewards",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      },
+      "features-products": {
+        "type": "features-products",
+        "settings": {}
+      },
+      "guarantee-box": {
+        "type": "guarantee-box",
+        "blocks": {
+          "1567755631188": {
+            "type": "text",
+            "settings": {
+              "guarantee_box_image": "shopify:\/\/shop_images\/1.png",
+              "guarantee_box_text": "Money Back Guarantee"
+            }
+          },
+          "1567755803132": {
+            "type": "text",
+            "settings": {
+              "guarantee_box_image": "shopify:\/\/shop_images\/2.png",
+              "guarantee_box_text": "Lifetime Guarantee"
+            }
+          }
+        },
+        "block_order": [
+          "1567755631188",
+          "1567755803132"
+        ],
+        "settings": {}
+      },
+      "1568357614858": {
+        "type": "our-story",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Schermafbeelding_2019-10-23_om_10.21.09.png",
+          "story_title": "My Story",
+          "story_text": "My name is Stephen Condon. I am the founder and CEO of Bossman Brands. Long before this beard craze I decided to grow out my beard, and of course I was victim to the dreadful “beard itch”. I sought out to find a cure and realized people overseas where making beard oils. In my kitchen, I started toying with different formulas and ingredients to see what worked best on my huge beard.",
+          "story_button_text": "READ MORE",
+          "story_button_url": "shopify:\/\/pages\/about-bossman-beard-care"
+        }
+      },
+      "1568363521580": {
+        "type": "home-reviews",
+        "blocks": {
+          "1568363538450": {
+            "type": "text",
+            "settings": {
+              "reviews_count": "5",
+              "review_title": "Great Products",
+              "review_subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+            }
+          },
+          "1568367371310": {
+            "type": "text",
+            "settings": {
+              "reviews_count": "5",
+              "review_title": "Great Products",
+              "review_subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+            }
+          },
+          "1568367381632": {
+            "type": "text",
+            "settings": {
+              "reviews_count": "5",
+              "review_title": "Great Products",
+              "review_subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+            }
+          }
+        },
+        "block_order": [
+          "1568363538450",
+          "1568367371310",
+          "1568367381632"
+        ],
+        "settings": {
+          "section_title": "WHAT OUR CUSTOMERS SAY"
+        }
+      },
+      "brotherhood": {
+        "type": "brotherhood",
+        "blocks": {
+          "1569303348817": {
+            "type": "text",
+            "settings": {
+              "brotherhood_img": "shopify:\/\/shop_images\/lumberjack.jpg",
+              "brotherhood_content_title": "Test Title",
+              "brotherhood_content_text": "Bossman Brands makes the best products on the market and we stand by every one of them. We offer a LIFETIME Warranty and a Money-Back Guarantee."
+            }
+          },
+          "1569303416067": {
+            "type": "text",
+            "settings": {
+              "brotherhood_img": "shopify:\/\/shop_images\/image2.jpg",
+              "brotherhood_content_title": "Test Title",
+              "brotherhood_content_text": "Bossman Brands makes the best products on the market and we stand by every one of them. We offer a LIFETIME Warranty and a Money-Back Guarantee."
+            }
+          },
+          "1569303452560": {
+            "type": "text",
+            "settings": {
+              "brotherhood_img": "shopify:\/\/shop_images\/alan-from-the-hangover.jpg",
+              "brotherhood_content_title": "Test Title",
+              "brotherhood_content_text": "Bossman Brands makes the best products on the market and we stand by every one of them. We offer a LIFETIME Warranty and a Money-Back Guarantee."
+            }
+          },
+          "1569305671389": {
+            "type": "text",
+            "settings": {
+              "brotherhood_img": "shopify:\/\/shop_images\/2.jpg",
+              "brotherhood_content_title": "Ttitle",
+              "brotherhood_content_text": "Bossman Brands makes the best products on the market and we stand by every one of them. We offer a LIFETIME Warranty and a Money-Back Guarantee."
+            }
+          },
+          "1569305753375": {
+            "type": "text",
+            "settings": {
+              "brotherhood_img": "shopify:\/\/shop_images\/Stephen-Jedi-copy.jpeg",
+              "brotherhood_content_title": "Ttile",
+              "brotherhood_content_text": "Bossman Brands makes the best products on the market and we stand by every one of them. We offer a LIFETIME Warranty and a Money-Back Guarantee."
+            }
+          }
+        },
+        "block_order": [
+          "1569303348817",
+          "1569303416067",
+          "1569303452560",
+          "1569305671389",
+          "1569305753375"
+        ],
+        "settings": {
+          "brotherhood_section_enable": true
+        }
+      },
+      "related-products": {
+        "type": "related-products",
+        "settings": {}
+      },
+      "1578112546191": {
+        "type": "hypervisual-page",
+        "settings": {
+          "hypervisual_page": "illegal"
+        }
+      },
+      "blog-sidebar": {
+        "type": "blog-sidebar",
+        "settings": {
+          "blog_category": "Beard Tips, Grooming Tips, Funny, How-To's, Beard Success, Austin, Beard Conditioner, Beard Facts, Beard Products,"
+        }
+      }
+    },
+    "content_for_index": [
+      "1578112546191",
+      "1568357614858",
+      "1568363521580"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "ajax_cart_method": "drawer",
+      "cart_notes_enable": true,
+      "color_body_bg": "#fff",
+      "color_body_text": "#333333",
+      "color_borders": "#e5e5e5",
+      "color_footer_bg": "#f2f2f2",
+      "color_footer_social_link": "#bbbbbb",
+      "color_footer_text": "#636363",
+      "color_primary": "#747474",
+      "color_secondary": "#bbb",
+      "favicon_enable": false,
+      "footer_newsletter_enable": true,
+      "footer_social_enable": true,
+      "logo_use_image": false,
+      "social_facebook_link": "",
+      "social_twitter_link": ""
+    }
+  }
+}

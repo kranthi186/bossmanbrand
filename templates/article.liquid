@@ -1,0 +1,82 @@
+{% assign number_of_comments = article.comments_count %}
+{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+<section class="article">
+	<div class="container">
+  		<article itemscope itemtype="http://schema.org/Article">
+          <header class="section-header">
+            <h1>{{ article.title }}</h1>
+            <div class="header_meta">
+              <p>By {{ article.author }}</p>
+              <p><time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time></p>
+            </div>
+          </header>
+			{% if article.image %}{{ article | img_url: '1920x1080' | img_tag: article.title }} {% endif %}
+          <div class="content" itemprop="articleBody">{% include 'hypervisual' %}
+{{ article.content }}</div>
+		
+          {% if blog.next_article or blog.previous_article %}
+          	<div class="btns">
+              {% if blog.previous_article %}
+              	<a href="{{ blog.previous_article }}" class="left" style="margin-right: 20px"></a>
+              {% endif %}
+              {% if blog.next_article %}
+              	<a href="{{ blog.next_article }}" class="right"></a>
+              {% endif %}
+          	</div>
+          {% endif %}
+      </article>
+	</div>
+</section>
+
+<style>
+  .article {padding: 30px 0}
+  .article img {max-width: 100%; height: auto; margin: 0 0 20px}
+  .section-header h1 {margin: 0 0 20px}
+  .header_meta {display: flex; justify-content: space-between; margin: 0 0 20px}
+  .header_meta p {
+    font-size: 13px;
+    font-family: 'PT Sans', sans-serif;
+    color: #7f7f7f;
+    font-style: italic
+  }
+  .content {
+    margin: 0 0 20px;
+    font-size: 16px
+  }
+  .btns {
+    display: flex;
+    justify-content: center;
+    align-items: center
+  }
+  .btns .left, .btns .right {
+    background-color: #dfdfdf;
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle
+  }
+  .btns .left:before {
+  	content: '';
+    display: inline-block;
+    width: 5px;
+    height: 7px;
+    background-image: url({{ 'icons.svg' | asset_url }});
+    background-position: 0 -365px;
+    background-repeat: no-repeat;
+  }
+  .btns .right:before {
+	content: '';
+    display: inline-block;
+    width: 5px;
+    height: 7px;
+    background-image: url({{ 'icons.svg' | asset_url }});
+    background-position: 0 -365px;
+    background-repeat: no-repeat;
+    transform: rotateY(180deg);
+  }
+</style>

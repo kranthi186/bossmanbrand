@@ -1,0 +1,74 @@
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+<div class="products_content_main__grid_box">
+  <h3>{{ product.title }}</h3>
+  {% if product.featured_image %}
+    <div class="reviews">
+      {% include 'okendo-reviews-product-rating-summary' %}
+    </div>
+    <div class="price">
+      {% if on_sale %}
+        <span>{{ product.price | money }}</span>
+        <span class="sale">{{ product.compare_at_price | money }}</span>
+      {% else %}
+          <span>{{ product.price | money }}</span>
+      {% endif %}
+    </div>
+    <div class="main">
+      <div class="img">
+           <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}">
+      </div>
+      <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="form-vertical">
+        <select name="id" id="productSelect" class="product-single__variants" style="display: none">
+          {% for variant in product.variants %}
+          {% if variant.available %}
+          <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+          {% else %}
+          <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+        <input type="hidden" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+        <button type="submit" name="add" id="AddToCart" class="btn">Shop now</button>
+      </form>
+    </div>
+    <div class="description">{{ product.description }}</div>
+  {% else %}
+  	<div>Blog article</div>
+  {% endif %}
+  <a href="{{ product.url | within: collection }}" style="color: #ee2445;text-decoration: underline;">Click here for details</a>
+</div>
+
+<style>
+  .products_content_main__grid_box .description {height: 90px; overflow: hidden}
+  .products_content_main__grid_box .description .text {
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -ms-line-clamp: 3;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    display: -webkit-box;
+    display: box;
+    word-wrap: break-word;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    font-size: 15px;
+    line-height: 19px;
+  }
+  .yotpo-clr {display: none; !important}
+  .ro_widget {display: none;}
+    @media only screen and (max-width: 480px) {
+      .products_content_main__grid_box .main .img {margin-right: 0}
+      .products_content_main__grid_box .main {flex-direction: column; align-items: center; width: 100%;}
+      .products_content_main__grid_box .main form {display: block; width: 100%}
+    .products_content_main__grid_box .main .btn {width: 100%}
+  }
+  @media only screen and (max-width: 320px) {
+    .products_content_main__grid_box .main form {display: block; width: 100%}
+    .products_content_main__grid_box .main .btn {width: 100%}
+  }
+</style>

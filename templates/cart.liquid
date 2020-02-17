@@ -1,0 +1,118 @@
+{% include 'bold-cart' %}
+{% assign on_sale = false %}
+{% if item.compare_at_price > bold_item_price %}
+  {% assign on_sale = true %}
+{% endif %}
+<section class="main">
+  <div class="container">
+    <div {% if cart.item_count > 0 %}class="cart"{% else %}class="cart empty"{% endif %}>
+      <div class="cart_sidebar">
+        {% if cart.item_count > 0 %}
+          {% section 'guarantee-box' %}
+       	{% else %}
+       		<div></div>
+        {% endif %}
+        <div class="menu">
+          <ul>
+            {% for link in linklists.cart-nav.links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% if cart.item_count > 0 %}
+       	 <div class="banner">
+          <img src="{{ "security.png" | asset_url }}" alt="Security">
+        </div>
+       	{% endif %}
+      </div>
+      <div class="cart_main">
+        {% if cart.item_count > 0 %}
+          <form action="/cart" method="post">
+          <div class="cart_main_head">
+          	<h1>Your shopping cart</h1>
+          	<button class="btn" name="checkout">Checkout now!</button>
+          </div>
+          <div class="table">
+            <div class="table_head">
+              <span></span>
+              <span>Product name</span>
+              <span>Unit price</span>
+              <span>Qty</span>
+              <span>Subtotal</span>
+            </div>
+            <div class="table_main">
+              {% for item in cart.items %}
+              {% include 'bold-cart-item' with item %}
+                <div class="table_main_row" data-label="{{ 'customer.order.product' | t }}">
+                  <span>
+                    <a href="{{item.url}}"><img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}"></a>
+                  </span>
+                  <span><a href="{{item.url}}">{{ item.title | escape }}</a></span>
+                  {% if on_sale %}
+                    <span class="startprice">{{ item.compare_at_price | money }}</span>
+                  {% else %}
+                    <span class="startprice">{{ bold_item_price | money }}</span>
+                  {% endif %}
+                  <span>
+                      <input type="text" name="updates[]" size="4" id="updates_{{ item.id }}" class="update_item" value="{{ item.quantity }}" />
+                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart__remove {{ bold_remove_class }}" data-id="{{ item.id }}" type="reset" id="resetCount"><i class="fas fa-times"></i></a>
+                  </span>
+                  <span class="totalprice">{{ bold_item_price | times: item.quantity | money }}</span> 
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          {{ bold_ro_cart }}
+          <a href="/collections/all" class="continue" style="width: 50%">Continue shopping</a>
+          <div class="comments">
+            {% comment %}<span>Order comments</span>{% endcomment %}
+            <div>
+              {% comment %}
+              {% if settings.cart_notes_enable %}
+          		<textarea name="note" class="input-full" style="border: 1px solid #efefef" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+      		  {% endif %}
+              {% endcomment %}
+                <span>
+                  <span>Subtotal</span>
+                  <span>{{ bold_cart_total_price | money }}</span>
+                </span>
+              <div class="buttons">
+
+                <button class="btn-white" style="cursor: pointer">Update cart</button>
+                <button class="btn" name="checkout">Proceed to checkout</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        {% else %}
+        <div class="cart_main_head">
+          	<h1>Your shopping cart</h1>
+			<p>Looks like you don't have anything in your cart yet. Below are a few of our favorites to get you started.</p>
+          </div>
+        <div class="cart_main_grid">
+          {% assign collectionName = 'beard-care-packages' %}
+          {% for product in collections[collectionName].products limit: 1 %}
+          	{% include 'related-cart-product' %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% comment %}{% section 'customer-review' %}{% endcomment %}
+    </section>
+    
+<style>
+
+  .main .cart_main .table_main_row span {
+  
+    border: none;
+    
+  }
+  
+  .main .cart_main .table_main_row {
+  
+        border-bottom: 1px solid #cecece;
+    
+  }
+
+</style>
