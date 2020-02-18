@@ -48,7 +48,7 @@
         {% include 'head_script' content_for_header: content_for_header %}
         {% include 'bold-common' %}
         {% include 'bold-ro-init' %}
-        {% comment %} Judge.me content removed from here {% endcomment %}
+        
         <script id="oke-reviews-settings" type="application/json">
             {"disableInitialReviewsFetchOnProducts":false,"subscriberId":"a30386fd-4802-45d9-bd70-65e331424260"}
         </script>
@@ -57,7 +57,7 @@
 {{ shop.metafields.okendo.StyleCustomizations }}
 {% endcomment %}
         {% include 'okendo-json-ld' %}
-        {% include 'judgeme_core' %}
+        
         
         {% if template contains 'product' %}
             <link href="//{{shop.domain}}/apps/fireamp/products/{{product.handle}}" rel="amphtml">
